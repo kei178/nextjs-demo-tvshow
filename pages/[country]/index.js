@@ -2,8 +2,8 @@
 import axios from 'axios';
 import Thumbnail from '../../components/Thumbnail';
 // import ThumbnailWithSass from '../../components/ThumbnailWithSass';
-
 import Error from 'next/error';
+import cookies from 'nookies';
 
 const Home = ({ shows, country, statusCode }) => {
   if (statusCode) {
@@ -52,7 +52,8 @@ const Home = ({ shows, country, statusCode }) => {
 // `context` includes request info
 Home.getInitialProps = async (context) => {
   try {
-    const country = context.query.country || 'us';
+    const { defaultCountry } = cookies.get(context);
+    const country = context.query.country || defaultCountry || 'us';
 
     const response = await axios.get(
       `https://api.tvmaze.com/schedule?country=${country}&date=2014-12-01`
