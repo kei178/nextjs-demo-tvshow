@@ -62,6 +62,7 @@ const Header = () => {
           <a onClick={handleSignout}>Sign out</a>
         </Link>
       )}
+
       <style jsx>{`
         .header {
           padding: 20px;
